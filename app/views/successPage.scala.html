@@ -1,0 +1,265 @@
+@(pid: String)
+@import helper._
+@main{
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        .icon-bar {
+            width: 100%;
+            background-color: #01a185;
+            overflow: auto;
+        }
+        
+        .icon-bar a {
+            float: left;
+            width: 20%;
+            text-align: center;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .icon-bar a:hover {
+            background-color: #000;
+        }
+        
+        .activeBar {
+            background-color: #f3c500 !important;
+        }
+        
+        .collapse {
+            height: 100%;
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+        }
+        
+        @@keyframes slideInFromLeft {
+            0% {
+                transform: translateY(-5%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        .btnN:hover {
+            background-color: #f3c500 !important;
+            border: 1px solid #f3c500 !important;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .post-ad-form input[type="email"],input[type="number"] {
+		    padding: 10px 10px 10px 10px;
+		    width: 70%;
+		    margin-bottom: 25px;
+		    border: 1px solid #01a185;
+		    outline: none;
+		    color: #555;
+		    transition: 0.5s all;
+		    -webkit-transition: 0.5s all;
+		    -moz-transition: 0.5s all;
+		    -o-transition: 0.5s all;
+		    -ms-transition: 0.5s all;
+		    float: left;
+		}
+    </style>
+</head>
+
+<div class="submit-ad main-grid-border" style="height:100%;margin-bottom: 5%;border-bottom: none" >
+    <div class="container" ng-app="successPage" ng-controller="adDetails">
+        <h2 class="head">Post an Ad</h2>
+        <div style="border:1px solid #f3c500;height:100%;border-top:none;">
+            <div class="icon-bar" style="text-align: right;">
+                <a class="toggle activeBar" ><i class="fa fa-check-circle-o "></i></a>
+            </div>
+            <div class="post-ad-form" style="border:none;margin-bottom: 0px ">
+                    <div id="first" class="collapse">
+                    <div class="row">
+                    <div class="col-md-6">
+                    	<h2 class="head" style="color:#01a185;margin-top: 0px;">Ad Created Successfully <i class="fa fa-check fa-1x"></i></h2>
+                    	</div>
+						
+                    </div>
+                    <div class="row" style="padding:20px">
+                    	<div class="col-md-4" style="border-right:2px dashed #01a185;min-height:250px">
+                    	
+                    	<div class="row">
+                    		<div class="col-md-12" style="text-align: left;">
+                    			<label style="width:100%;color:#f3c500;font-size: large; ">Ad Title</label>
+                    		</div>
+                    		<div class="col-md-12" style="text-align: left;padding-bottom: 20px">
+                    			<label style="width:100%;color:#01a185;font-size: large;">{{adDetails[0].title}}</label>
+                    		</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-12" style="text-align: left;">
+                    			<label style="width:100%;color:#f3c500;font-size: large; ">Ad Type</label>
+                    		</div>
+                    		<div class="col-md-12" style="text-align: left;padding-bottom: 20px">
+                    			<label style="width:100%;color:#01a185;font-size: large;">{{adDetails[0].productType.subCategory.category.category}}</label>
+                    		</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-12" style="text-align: left;">
+                    			<label style="width:100%;color:#f3c500;font-size: large; ">Description</label>
+                    		</div>
+                    		<div class="col-md-12" style="text-align: left;padding-bottom: 20px">
+                    			<p style="width:100%;color:#01a185;font-size: large; ">
+                   					{{adDetails[0].description}} 	
+                    			</p>
+                    		</div>
+                    	</div>
+                    		
+                    		
+                    	</div>
+                    	<div class="col-md-4" style="border-right:2px dashed #01a185;min-height:250px">
+                    		<div class="row">
+                    		<div class="col-md-6" style="text-align: left;">
+                    			<label style="width:100%;color:#f3c500;font-size: large; ">Rent Amount</label>
+                    		</div>
+                    		<div class="col-md-6" style="text-align: left;padding-bottom: 20px">
+                    			<label style="width:100%;color:#01a185;font-size: large;">{{adDetails[0].price}}  <span>₹</span></label>
+                    		</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-6" style="text-align: left;">
+                    			<label style="width:100%;color:#f3c500;font-size: large; ">Deposit</label>
+                    		</div>
+                    		<div class="col-md-6" style="text-align: left;padding-bottom: 20px">
+                    			<label style="width:100%;color:#01a185;font-size: large;">{{adDetails[0].deposit}} <span>₹</span></label>
+                    		</div>
+                    	</div>
+                    	<div class="row">
+                    		<div class="col-md-6" style="text-align: left;">
+                    			<label style="width:100%;color:#f3c500;font-size: large; ">Duration</label>
+                    		</div>
+                    		<div class="col-md-6" style="text-align: left;padding-bottom: 20px">
+                    			<label style="width:100%;color:#01a185;font-size: large;">{{adDetails[0].duration}} </label>
+                    		</div>
+                    	</div>
+                    	</div>
+                    	<div class="col-md-4">
+                    		<div class="col-md-12" style="padding-bottom: 5px">
+                    			<img src="" style="height: 150px;width:100%" id="adPreview">
+                    		</div>
+                    		<div class="col-md-12" style="height: 100px;padding:0px">
+	                    		<div class="col-md-3" >
+	                    			<img src="" style="height: 90px;width:100%;padding-right:0px" onclick="readURL(this)" onerror="handleError(this)"  id="adPreview1">
+                    			</div>
+                    			<div class="col-md-3" >
+	                    			<img src="" style="height: 90px;width:100%;padding-right:0px" onclick="readURL(this)" onerror="handleError(this)" id="adPreview2">
+                    			</div>
+                    			<div class="col-md-3" >
+	                    			<img src="" style="height: 90px;width:100%;padding-right:0px" onclick="readURL(this)" onerror="handleError(this)" id="adPreview3">
+                    			</div>
+                    			<div class="col-md-3" >
+	                    			<img src="" style="height: 90px;width:100%;padding-right:0px" onclick="readURL(this)" onerror="handleError(this)" id="adPreview4">
+                    			</div>
+                    		</div>
+                    	</div>
+                    </div>
+                    	
+                        
+
+                        
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:20px;">
+                            <a href="/" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;">Close</a>
+
+                        </div>
+                    </div>
+                    
+                    
+
+                
+                    
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  <script src="@routes.Assets.at("angularjs/createAd.js")"></script> -->
+	<script>
+	$(document).ready(function(){
+		$("html, body").animate({ scrollTop: 450 }, "slow");
+		$('#first').show();
+		$('.error').hide();
+		
+		
+	});
+	var app = angular.module('successPage', []);
+	app.controller('adDetails', function($scope, $http) {
+// 		$scope.imagePath = ["/assets/images/ad1.jpg","/assets/images/ad1.jpg","/assets/images/ad1.jpg","/assets/images/ad1.jpg","/assets/images/ad1.jpg"]
+		$http.get("/product/"+@pid)
+	        .then(function(response) {
+	        	$scope.adDetails = response.data;
+	        	$scope.imagePath = $scope.adDetails[1].images;
+
+	        	$("#adPreview").attr('src',$scope.imagePath[0])
+	        	$("#adPreview1").attr('src',$scope.imagePath[1])
+	        	$("#adPreview2").attr('src',$scope.imagePath[2])
+	        	$("#adPreview3").attr('src',$scope.imagePath[3])
+	        	$("#adPreview4").attr('src',$scope.imagePath[4])
+	        });
+		
+	});
+	
+	function getProductSpecificForm(route){
+		$.ajaxSetup({async: false});
+		$('#forth').load(route);
+	}
+	
+	
+	
+	
+	
+	function hideError(id){
+		
+		$('.error').show()
+		setTimeout(function() {
+		    $('.error').fadeOut('fast');
+		}, 5000);
+	}
+	
+	function submitFormSpecific(){
+		$("#productId").val(pid)
+		$("#description2").val($("#description").val())
+		var action = $('#specific').attr('action'); 
+		$.ajax({
+ 	        type: "POST",
+ 	       data: $("#specific").serialize(),
+ 	      url: action,
+ 			success: function(res) {
+ 	        	
+ 	              
+ 	        	if(res!= "0"){
+ 	        		
+ 	        		alert(res)
+ 	            }else{
+ 	              alert(res)
+ 	            	
+ 	            }
+ 	        },
+ 	        error: function(err) {
+ 	          
+ 	        }
+ 	    });
+	}
+	
+	function readURL(input) {
+		var url = $('#adPreview').attr('src');
+		$('#adPreview').attr('src', $(input).attr('src'));
+		$(input).attr('src', url);
+	}
+	function handleError(input){
+		$(input).attr('src','/assets/images/ad1.jpg')
+	}
+	</script>
+}

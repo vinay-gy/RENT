@@ -1,0 +1,108 @@
+@(form: Form[Cameras])
+<form id="specific" action="/product/cameras/save" method="post">
+				<input type="hidden" name="product.id" id="productId"/>
+				<input type="hidden" name="description" id="description2"/>
+                <div>
+                        <div class="row">
+	                    <div class="col-md-6">
+	                    	<h2 class="head">Camera Particulars  </h2>
+                        	</div>
+							<div class="col-md-6" style="text-align: right;" id="fortherror" class="error">
+	                    	<h3 class="head" style="color:red;">Please fill all the mandatory fields (*)</h3>
+	                    	</div>
+	                    </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Brand Name <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select  style="width:100%" name="brand" id="brand">
+                                        <option value="one" selected>Select Brand</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Model</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="model" id="model" >
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                     
+                   
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Additional </label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <div class="col-md-6">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="checkbox" name="pickUpDrop" > Pick & Drop</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="checkbox" name="anyAccessories" > accessories</label>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Any Damages </label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <div class="col-md-6">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="anyDamages" value="true"> Yes</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="anyDamages" value="false"> No</label>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Damages Details</label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <textarea ng-model="damageDetails" name="damageDetails" id="damageDetails" class="mess" placeholder="Mention clearly about damages" style="width:100%"></textarea>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                       
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('third')">Previous</button>
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('fivth')">Next</button>
+
+                        </div>
+                    </div>
+                    </form>
+                    
+                    <script>
+                    $(document).ready(function(){
+                		$('.error').hide();
+                		
+                	});
+                    function formValidation(){
+                    	var result = true;
+                    	if($("#brand").val() == null || $("#model").val() == "" || $("#ram").val() == null || $("#hardDisk").val() == "" || $("#processor").val() == "" || $('input[name=isWithDriver]:checked').length<=0)
+            	        	result = false;
+            	    	
+                    	return result;
+                    }
+                    </script>

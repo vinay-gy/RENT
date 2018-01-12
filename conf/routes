@@ -1,0 +1,81 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               	controllers.Assets.at(path="/public", file)
+
+# Home page
+# Home page
+GET     /               					controllers.Application.index()
+GET     /createAd               			controllers.ProductController.create()
+GET     /getForm/:productID	               	controllers.ProductController.getProductForm(productID)
+# CRUD Controllers and REST API
+->     /                play.crud.Routes
+
+#------------------ category routes -------------------------#
+
+GET		/category/list									controllers.CategoryController.categoryList()
+GET		/subcategory/:categoryId						controllers.CategoryController.subCategoryList(categoryId)
+
+#------------------ Login routes ----------------------------#
+
+GET    /login                controllers.loginController.login(message ?= "")
+GET    /logout               controllers.loginController.logout()
+GET    /signup               controllers.loginController.signUp()
+POST   /saveSignupDetails    controllers.loginController.save()
+GET    /encryptpass          controllers.loginController.encryptAES(password)
+POST   /validate            controllers.loginController.authenticate()
+
+#------------------ Utility routes ----------------------------#
+
+GET    /locations                controllers.Application.locations()
+GET    /user/location/:location            controllers.Application.saveLocation(location)
+
+#------------------ Customer routes ----------------------------#
+
+GET    /customer/:customerId                controllers.CustomerController.customerInfo(customerId)
+GET    /validate/email/:email                		controllers.CustomerController.validateEmail(email)
+GET    /validate/mobile/:mobile                	controllers.CustomerController.validateMobile(mobile)
+
+#------------------ Product routes -------------------------#
+
+GET		/product/:pid									controllers.ProductController.productDetails(pid)
+GET		/producttype/:subCatId							controllers.ProductController.productTypeList(subCatId)
+POST	/product/save									controllers.ProductController.save()
+GET		/product/residential/create						controllers.RealEstateController.createResidential()
+GET		/product/commercial/create						controllers.RealEstateController.createCommercial()
+POST	/product/residential/save						controllers.RealEstateController.saveRealEstateResidential()
+POST	/product/commercial/save						controllers.RealEstateController.saveRealEstateCommercial()
+GET		/product/create/success/:pid					controllers.ProductController.successPage(pid)
+
+GET		/product/vehicles/create						controllers.VehicleController.create()
+POST	/product/vehicles/save							controllers.VehicleController.save()
+
+GET		/product/computers/create						controllers.ComputersController.create()
+POST	/product/computers/save							controllers.ComputersController.save()
+
+GET 	/product/cameras/create							controllers.CameraController.create()
+POST	/product/cameras/save							controllers.CameraController.save()
+
+GET    /categories                                      controllers.dashboardController.category()
+GET    /getAdDetails                                   controllers.ProductController.getAdDetails(categoryId)
+GET    /getrealestate                                   controllers.RealEstateController.getRealEstate()
+GET    /productDetails                                  controllers.RealEstateController.productDetails(productId)
+GET    /getRealEstateDetails                            controllers.RealEstateController.getRealEstateDetails(productTypeId)
+GET    /getproductDetails                               controllers.RealEstateController.getproductDetails(productId)
+
+GET    /vehicleDetails                                  controllers.VehicleController.vehicleDetails(productId)
+GET    /getVehicleDetails                               controllers.VehicleController.getVehicleDetails(productId)
+
+GET    /computerDetails                                 controllers.ComputersController.computerDetails(productId)
+GET    /getComputerDetails                              controllers.ComputersController.getComputerDetails(productId)
+
+GET    /cameraDetails                                   controllers.CameraController.cameraDetails(productId)
+GET    /getCameraDetails                                controllers.CameraController.getCameraDetails(productId)
+
+GET    /commercialDetails                               controllers.RealEstateController.commercialDetails(productId)
+GET    /getcommercialDetails                            controllers.RealEstateController.getcommercialDetails(productId)
+
+
+
+

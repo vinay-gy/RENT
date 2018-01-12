@@ -1,0 +1,233 @@
+@(categoryId:String)
+<div class="total-ads main-grid-border">
+		<div class="container">
+			<div class="select-box" style="width:68%">
+				
+				<div class="browse-category ads-list">
+					<label>Sub Categories</label>
+					<select class="selectpicker show-tick" data-live-search="true" id="subCategories" onchange="productType()" style="width:85%">
+<!-- 					  <option data-tokens="Real Estate">Real Estate</option> -->
+<!-- 					  <option data-tokens="Mobiles">Mobiles</option> -->
+<!-- 					  <option data-tokens="Electronics & Appliances">Electronics & Appliances</option> -->
+<!-- 					  <option data-tokens="Cars">Cars</option> -->
+<!-- 					  <option data-tokens="Bikes">Bikes</option> -->
+<!-- 					  <option data-tokens="Furniture">Furniture</option> -->
+<!-- 					  <option data-tokens="Pets">Pets</option> -->
+<!-- 					  <option data-tokens="Books, Sports & Hobbies">Books, Sports & Hobbies</option> -->
+<!-- 					  <option data-tokens="Fashion">Fashion</option> -->
+<!-- 					  <option data-tokens="Kids">Kids</option> -->
+<!-- 					  <option data-tokens="Services">Services</option> -->
+<!-- 					  <option data-tokens="Jobs">Jobs</option> -->
+					</select>
+				</div>
+				<div class="search-product ads-list">
+					<label>Search for a specific product</label>
+					<select class="selectpicker show-tick" data-live-search="true" id="productType" style="width:85%">
+					
+					</select>
+<!-- 					<div class="search"> -->
+<!-- 						<div id="custom-search-input"> -->
+<!-- 						<div class="input-group"> -->
+<!-- 							<input type="text" class="form-control input-lg" placeholder="Buscar" /> -->
+<!-- 							<span class="input-group-btn"> -->
+<!-- 								<button class="btn btn-info btn-lg" type="button"> -->
+<!-- 									<i class="glyphicon glyphicon-search"></i> -->
+<!-- 								</button> -->
+<!-- 							</span> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					</div> -->
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="ads-grid">
+				
+				<div class="ads-display col-md-9">
+					<div class="wrapper">					
+<!-- 					<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs"> -->
+<!-- 					  <ul id="myTab" class="nav nav-tabs nav-tabs-responsive" role="tablist"> -->
+<!-- 						<li role="presentation" class="active"> -->
+<!-- 						  <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"> -->
+<!-- 							<span class="text">All Ads</span> -->
+<!-- 						  </a> -->
+<!-- 						</li> -->
+<!-- 						<li role="presentation" class="active"> -->
+<!-- 						  <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile"> -->
+<!-- 							<span class="text">Ads with Photos</span> -->
+<!-- 						  </a> -->
+<!-- 						</li> -->
+<!-- 					  </ul> -->
+					  <div id="myTabContent" class="tab-content" style="margin-right:9%;">
+						
+						<div role="tabpanel" class="tab-pane fade in active" id="profile" aria-labelledby="profile-tab">
+						 <div>
+												<div id="container">
+								<div class="view-controls-list" id="viewcontrols">
+									<label>view :</label>
+									<a class="gridview"><i class="glyphicon glyphicon-th"></i></a>
+									<a class="listview active"><i class="glyphicon glyphicon-th-list"></i></a>
+								</div>
+								<div class="sort">
+								   <div class="sort-by">
+										<label>Sort By : </label>
+										<select>
+														<option value="">Most recent</option>
+														<option value="">Price: Rs Low to High</option>
+														<option value="">Price: Rs High to Low</option>
+										</select>
+									   </div>
+									 </div>
+								<div class="clearfix"></div>
+							<ul class="list" id="list">
+								<a href="single.html">
+<!-- 									<li> -->
+<!-- 									<img src="images/r1.jpg" title="" alt="" /> -->
+<!-- 									<section class="list-left"> -->
+<!-- 									<h5 class="title" id="title"></h5> -->
+<!-- 									<span class="adprice" id="adprice"></span> -->
+<!-- 									<p class="catpath">Real Estate » PG & Roommates</p> -->
+<!-- 									</section> -->
+<!-- 									<section class="list-right"> -->
+<!-- 									<span class="date" id="date"></span> -->
+<!-- 									<span class="cityname" id="cityname"></span> -->
+<!-- 									</section> -->
+<!-- 									<div class="clearfix"></div> -->
+<!-- 									</li>  -->
+								</a>
+								
+							</ul>
+						</div>
+							</div>
+						</div>
+						<ul class="pagination pagination-sm">
+							<li><a href="#">Prev</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">6</a></li>
+							<li><a href="#">7</a></li>
+							<li><a href="#">8</a></li>
+							<li><a href="#">Next</a></li>
+						</ul>
+					  </div>
+					</div>
+				</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>	
+<!-- 	</div> -->
+	
+	<script type="text/javascript">
+$(document).ready(function () {    
+var elem=$('#container ul');      
+	$('#viewcontrols a').on('click',function(e) {
+		if ($(this).hasClass('gridview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('list').addClass('grid');
+				$('#viewcontrols').removeClass('view-controls-list').addClass('view-controls-grid');
+				$('#viewcontrols .gridview').addClass('active');
+				$('#viewcontrols .listview').removeClass('active');
+				elem.fadeIn(1000);
+			});						
+		}
+		else if($(this).hasClass('listview')) {
+			elem.fadeOut(1000, function () {
+				$('#container ul').removeClass('grid').addClass('list');
+				$('#viewcontrols').removeClass('view-controls-grid').addClass('view-controls-list');
+				$('#viewcontrols .gridview').removeClass('active');
+				$('#viewcontrols .listview').addClass('active');
+				elem.fadeIn(1000);
+			});									
+		}
+	});
+	subcategory();
+	adDetails();
+});
+
+function subcategory() {
+	$("#subCategories").empty();
+	$.get("/subcategory/@categoryId", function(data,status,xhr) {
+		$("#subCategories").append("<option value=''>Select Subcategory</option>");
+		$.each(data, function(i, item) {
+			//alert(item.subCategory);
+			$("#subCategories").append("<option data-tokens='"+item.subCategory+"' value='"+item.id+"'>"+item.subCategory+"</option>");
+			//$("#sub-categories").append("<div><div class='sub-categories'><ul><li><a href='javascript:getDetails()'>"+item.subCategory+"</a></li></ul></div></div>")
+			
+		});
+		
+		 
+	});
+    
+}
+
+function productType() {
+	var id = $("#subCategories").val();
+	$("#productType").empty();
+	$("#productType").append("<option value=''>Select ProductType</option>");
+	$.get("/producttype/"+id, function(data,status,xhr) {
+		
+		$.each(data, function(i, item) {
+			//alert(item.subCategory);
+			$("#productType").append("<option data-tokens='"+item.subCategory+"'>"+item.productType+"</option>");
+			//$("#sub-categories").append("<div><div class='sub-categories'><ul><li><a href='javascript:getDetails()'>"+item.subCategory+"</a></li></ul></div></div>")
+			
+		});
+		
+		 
+	});
+    
+}
+
+function adDetails(){
+	$.get("/getRealEstateDetails?productTypeId=@categoryId", function(data,status,xhr) {
+		
+   		$.each(data, function(i, item) {
+   			//alert(item.title);
+   			//document.getElementById("title").value=item.title;
+   			//alert(item.title)
+   			//for(int j=0;j<=i)
+    			var date=convert(item.postedDate);
+//    			$("#title").text(item.title);
+//    			$("#adprice").text(item.price);
+//    			$("#date").text(date);
+//    			$("#cityname").text(item.city);
+   			//var id=1;
+   			//var cat="hii ";
+   			$("#list").append("<a href=javascript:getProductDetails("+item.id+","+item.categories.id+","+item.subCategories.id+")><li><img src='"+item.imagePath+"' title='' alt=''' /><section class='list-left'><h5 class='title'>"+item.title+"</h5><span class='adprice'>"+item.price+"</span><p class='catpath'>Real Estate » PG & Roommates</p></section><section class='list-right'><span class='date'>"+date+"</span><span class='cityname'></span></section><div class='clearfix'></div></li></a>");
+   			
+   		});
+   		
+	});
+	
+}
+function getProductDetails(Id,category,subcategory){
+	
+	if(category =="10" && subcategory == "1"){
+		//alert(category =="10");
+	window.location.href ="/productDetails?productId=" + Id;
+	}else if(category =="2"){
+		window.location.href ="/vehicleDetails?productId=" + Id;
+	}else if(category =="3" && subcategory == "7"){
+		window.location.href ="/computerDetails?productId=" + Id;
+	}else if(category =="3" && subcategory == "8"){
+		window.location.href ="/cameraDetails?productId=" + Id;
+	}else if(category == "10" && subcategory == "2"){
+		window.location.href ="/commercialDetails?productId=" + Id;
+	}
+}
+function convert(str) {
+
+	var datePosted = new Date(str);
+	var dd = datePosted.getDate();
+	var mm = datePosted.getMonth() + 1;
+	var y = datePosted.getFullYear();
+	var retVal = y + '-' + mm + '-' + dd;
+	var posted = retVal + datePosted.getHours() + ":"
+			+ datePosted.getMinutes() + ":" + datePosted.getSeconds();
+	return posted;
+
+}
+</script>

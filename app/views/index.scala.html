@@ -1,0 +1,493 @@
+@main{
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        .icon-bar {
+            width: 100%;
+            background-color: #01a185;
+            overflow: auto;
+        }
+        
+        .icon-bar a {
+            float: left;
+            width: 20%;
+            text-align: center;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .icon-bar a:hover {
+            background-color: #000;
+        }
+        
+        .activeBar {
+            background-color: #f3c500 !important;
+        }
+        
+        .collapse {
+            height: 100%;
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+        }
+        
+        @@keyframes slideInFromLeft {
+            0% {
+                transform: translateY(-5%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        .btnN:hover {
+            background-color: #f3c500 !important;
+            border: 1px solid #f3c500 !important;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<div class="submit-ad main-grid-border" style="height:100%;margin-bottom: 5%;border-bottom: none" ng-app="myApp" ng-controller="createAdCtrl">
+    <div class="container">
+        <h2 class="head">Post an Ad</h2>
+        <div style="border:1px solid #f3c500;height:100%;border-top:none;">
+            <div class="icon-bar">
+                <a id="togglefirst" class="toggle activeBar" onclick="toggle('first')"><i class="fa fa-bars"></i></a>
+                <a id="togglesecond" class="toggle" onclick="toggle('second')"><i class="fa fa-image"></i></a>
+                <a id="togglethird" class="toggle" onclick="toggle('third')"><i class="fa fa-inr"></i></a>
+                <a id="toggleforth" class="toggle" onclick="toggle('forth')"><i class="fa fa-check-square-o"></i></a>
+                <a id="togglefivth" class="toggle" onclick="toggle('fivth')"><i class="fa fa-user"></i></a>
+            </div>
+            <div class="post-ad-form" style="border:none;margin-bottom: 0px ">
+                <form>
+
+                    <div id="first" class="collapse">
+
+                        <h2 class="head">Start adding your product</h2>
+
+                        <label>Select Category <span>*</span></label>
+                        <select ng-model="category" ng-change="changeCategory()">
+                            <option value="" selected>Select category</option>
+                            <option ng-repeat="x in categoryList" value="{{x.id}}">{{x.category}}</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <label>Select sub category <span>*</span></label>
+                        <select ng-model="sub_category" ng-change="changeSubCategory()">
+                            <option value="" selected>Select sub category</option>
+                            <option ng-repeat="x in subCategoryList" value="{{x.id}}">{{x.subCategory}}</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <label>Select Product Type <span>*</span></label>
+                        <select ng-model="product_type" ng-change="" name="productType.id">
+                            <option value="" selected>Select Product Type</option>
+                            <option ng-repeat="x in productTypeList" value="{{x.id}}">{{x.productType}}</option>
+                        </select>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('second')">Next</button>
+
+                        </div>
+                    </div>
+                    <div id="second" class="collapse">
+                        <h2 class="head">Upload Images </h2>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div class="col-md-4">
+                                <label style="width:100%">Ad Title <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="phone" placeholder="" style="width:100%" name="title">
+                            </div>
+                            <div class="col-md-4">
+                                <label style="width:100%">Ad Description <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea name="description" class="mess" placeholder="Write few lines about your product" style="width:100%"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Photos for your ad :</label>
+                            <div class="photos-upload-view">
+
+                                <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+
+                                <div>
+                                    <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                                    <div id="filedrag">or drop files here</div>
+                                </div>
+
+                                <div id="submitbutton">
+                                    <button type="submit">Upload Files</button>
+                                </div>
+
+                                <div id="messages">
+                                    <p>Status Messages</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <script src="@routes.Assets.at("theme/js/filedrag.js")"></script>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('first')">Previous</button>
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('third')">Next</button>
+
+                        </div>
+                    </div>
+                    <div id="third" class="collapse">
+                        <h2 class="head">Price Section </h2>
+
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 1%">
+                            <div class="col-md-4">
+                                <label style="width:100%">Rent Amount <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="phone" placeholder="" style="width:100%" name="price">
+                            </div>
+                            <div class="col-md-4">
+                                <label style="width:100%">Duration <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration"> Hourly</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration"> Daily</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration"> Monthly</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration"> Yearly</label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label style="width:100%">Is Negotiable <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isNegotiable"> Yes</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isNegotiable"> No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding-left: 0px;">
+		                                <label style="width:100%">Deposit Mandatory <span>*</span></label>
+		                            </div>
+		                            <div class="col-md-8">
+		                                <div class="col-md-6">
+		                                    <label style="width:100%;text-align:left">
+		                                        <input type="radio" name="isDepositOptional" ng-model="showDeposit"  ng-value="true"> Yes</label>
+		                                </div>
+		                                <div class="col-md-6">
+		                                    <label style="width:100%;text-align:left">
+		                                        <input type="radio" name="isDepositOptional" ng-model="showDeposit"   ng-value="false"> No</label>
+		                                </div>
+		                        </div>
+                            
+
+                            
+
+                        </div>
+                        <div class="col-md-6 col-sm-12" ng-show="(showDeposit ==true)?true:false" style="margin-bottom: 1%">
+	                        
+                            <div class="row" >
+                            	<div class="col-md-4">
+	                                <label style="width:100%">Deposit <span>*</span></label>
+	                            </div>
+	                            <div class="col-md-8">
+	                                <input type="text" class="phone" placeholder="" style="width:100%" name="deposit">
+	                            </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label style="width:100%">Refundable <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isRefundable"> Yes</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isRefundable"> No</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('second')">Previous</button>
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('forth')">Next</button>
+
+                        </div>
+                    </div>
+                    <div id="forth" class="collapse">
+                        <h2 class="head">Room Particulars  </h2>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Square Feet <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Floor No <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Age of Property <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-model="category" ng-change="changeCategory()" style="width:100%">
+                                        <option value="" selected>Select category</option>
+                                        <option ng-repeat="x in categoryList" value="{{x.id}}">{{x.category}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Property Type <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-model="category" ng-change="changeCategory()" style="width:100%">
+                                        <option value="" selected>Select category</option>
+                                        <option ng-repeat="x in categoryList" value="{{x.id}}">{{x.category}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Food allowed <span>*</span></label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <div class="col-md-3">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio"> Any</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio"> Veg</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio"> Non-Veg</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Toilet <span>*</span></label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <div class="col-md-4">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio"> Indian</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio"> Western</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio"> Both</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Search Keywords <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Address <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Select Country <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-model="category" ng-change="changeCategory()" style="width:100%">
+                                        <option value="" selected>Select category</option>
+                                        <option ng-repeat="x in categoryList" value="{{x.id}}">{{x.category}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Select State <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="state"  name="state" style="width:100%">
+									  <option value="" selected>Select State</option>
+									  <option value="1">Karnataka</option>
+									</select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Select City <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="city"  name="city" style="width:100%">
+									  <option value="" selected>Select City</option>
+									  <option value="1">Bangalore</option>
+									</select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Select Locality <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="locality" name="locality" style="width:100%">
+									  <option value="" selected>Select Locality</option>
+									  <option value="1">Basaveshwara nagara</option>
+									</select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('third')">Previous</button>
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('fivth')">Next</button>
+
+                        </div>
+                    </div>
+                    <div id="fivth" class="collapse">
+
+                        <h2 class="head">Profile Details</h2>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Your Name <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="phone" placeholder="" style="width:100%">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Your Email ID <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="email">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Mobile Number <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="mobile">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('forth')">Previous</button>
+							<button class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" >Submit</button>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+	<script>
+	$(document).ready(function(){
+		$("html, body").animate({ scrollTop: 450 }, "slow");
+		$('#first').show();
+	});
+	
+	function toggle(id){
+		$('.collapse').hide();
+		$('#'+id).show();
+		$('.activeBar').removeClass('activeBar')
+		$('#toggle'+id).addClass('activeBar')
+	}
+	
+	
+	var app = angular.module('myApp', []);
+	app.controller('createAdCtrl', function($scope, $http) {
+		$scope.showDeposit = true;
+		$scope.subCategoryList;
+		$scope.sub_category;
+		$scope.product_type;
+	    $http.get("category/list")
+	        .then(function(response) {
+	        	$scope.categoryList = response.data;
+	        });
+		$scope.changeCategory = function() {
+			$http.get("subcategory/"+$scope.category)
+	        .then(function(response) {
+	        	$scope.subCategoryList = response.data;
+	        });
+	    }
+		$scope.changeSubCategory = function() {
+			$http.get("producttype/"+$scope.sub_category)
+	        .then(function(response) {
+	        	$scope.productTypeList = response.data;
+	        });
+	    }
+	});
+	</script>
+}

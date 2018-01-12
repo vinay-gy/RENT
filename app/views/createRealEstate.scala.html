@@ -1,0 +1,161 @@
+@(cityform: Form[RealEstateResidential])
+<form id="specific" action="/product/residential/save" method="post">
+				<input type="hidden" name="product.id" id="productId"/>
+				<input type="hidden" name="description" id="description2"/>
+                <div>
+                        <div class="row">
+	                    <div class="col-md-6">
+	                    	<h2 class="head">Room Particulars  </h2>
+                        	</div>
+							<div class="col-md-6" style="text-align: right;" id="fortherror" class="error">
+	                    	<h3 class="head" style="color:red;">Please fill all the mandatory fields (*)</h3>
+	                    	</div>
+	                    </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Square Feet <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="squreFeets" id="sq_ft">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Floor No <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="floorNo" id="floor_no" >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Age of Property <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select  style="width:100%" name="propertyAge" id="age_of_property">
+                                        <option value="">Select Year</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="Below 2000">Below 2000</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Property Type <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select  style="width:100%" name="propertyType" id="property_type">
+                                        <option value="">Select type</option>
+                                        <option value="Single Occupancy">Single Occupancy</option>
+                                        <option value="Double Occupancy">Double Occupancy</option>
+                                        <option value="RK">RK</option>
+                                        <option value="1 BHK">1 BHK</option>
+                                        <option value="2 BHK">2 BHK</option>
+                                        <option value="3 BHK">3 BHK</option>
+                                        <option value="4 BHK">4 BHK</option>
+                                        <option value="5 BHK">5 BHK</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Food allowed <span>*</span></label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <div class="col-md-3">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="foodType" value="Any"> Any</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="foodType" value="Veg"> Veg</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="foodType" value="NonVeg"> Non-Veg</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Toilet <span>*</span></label>
+                                </div>
+                                <div class="col-md-8" style="padding-left:0px">
+                                    <div class="col-md-4">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="toiletType" value="Indian"> Indian</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="toiletType" value="Western" > Western</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label style="width:100%;text-align:left">
+                                            <input type="radio" name="toiletType" value="Both"> Both</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Search Keywords <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="search_key" id="search_key">
+                                </div>
+                            </div>
+                            
+                        </div>
+                       
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('third')">Previous</button>
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('fivth')">Next</button>
+
+                        </div>
+                    </div>
+                    </form>
+                    
+                    <script>
+                    $(document).ready(function(){
+                		$('.error').hide();
+                		
+                	});
+                    function formValidation(){
+                    	var result = true;
+                    	if($("#search_key").val() == null || $("#search_key").val() == "" || $("#sq_ft").val() == null || $("#sq_ft").val() == "" || $("#floor_no").val() == null || $("#floor_no").val() == "" || $("#age_of_property").val() == null || $("#age_of_property").val() == "" || $("#property_type").val() == null || $("#property_type").val() == "" || $('input[name=foodType]:checked').length<=0 || $('input[name=toiletType]:checked').length<=0)
+            	        	result = false;
+            	    	
+                    	return result;
+                    }
+                    </script>

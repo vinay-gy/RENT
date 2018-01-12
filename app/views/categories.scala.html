@@ -1,0 +1,132 @@
+
+@main{
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("theme/css/easy-responsive-tabs.css")" />
+<script src="@routes.Assets.at("theme/js/easyResponsiveTabs.js")"></script>	
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.js"></script> -->
+<div class="categories-section main-grid-border" ng-app="createAd" ng-controller="createAdCtrl">
+		<div class="container">
+		
+			<h2 class="head">Main Categories</h2>
+			<div class="category-list">
+				<div id="parentVerticalTab" >
+					<ul class="resp-tabs-list hor_1" id="categories">
+					
+<!-- 					<li ng-repeat="x in categoryList">{{x.category}}</li> -->
+<!-- 						<li>Mobiles</li> -->
+<!-- 						<li>Electronics & Appliances</li> -->
+<!-- 						<li>Cars</li> -->
+<!-- 						<li>Bikes</li> -->
+<!-- 						<li>Furniture</li> -->
+<!-- 						<li>Pets</li> -->
+<!-- 						<li>Books, Sports & Hobbies</li> -->
+<!-- 						<li>Fashion</li> -->
+<!-- 						<li>Kids</li> -->
+<!-- 						<li>Services</li> -->
+<!-- 						<li>Jobs</li> -->
+<!-- 						<li>Real Estate</li> -->
+<!-- 						<a href="all-classifieds.html">All Ads</a> -->
+					</ul>
+					<div class="resp-tabs-container hor_1" id="sub-categories">
+<!-- 						<span class="active total" style="display:block;" data-toggle="modal" data-target="#myModal"><strong>All USA</strong> (Select your city to see local ads)</span> -->
+						
+<!-- 						<div> 
+<!-- 							<div class="category"> -->
+<!-- 								<div class="category-img"> -->
+<!-- 									<img src="images/cat12.png" title="image" alt="" /> -->
+<!-- 								</div> -->
+<!-- 								<div class="category-info"> -->
+<!-- 									<h4>Real Estate</h4> -->
+<!-- 									<span>98,156 Ads</span> -->
+<!-- 									<a href="all-classifieds.html">View all Ads</a> -->
+<!-- 								</div> -->
+<!-- 								<div class="clearfix"></div> -->
+<!-- 							</div> -->
+<!-- 							<div class="sub-categories" > -->
+<!-- 								<ul> -->
+<!-- 									<li><a href="/getrealestate">Houses</a></li> --> 
+<!--  									<li><a href="real-estate.html">Apartments</a></li> --> 
+<!--  									<li><a href="real-estate.html">PG & Roommates</a></li> --> 
+<!--  									<li><a href="real-estate.html">Land & Plots</a></li> --> 
+<!-- 									<li><a href="real-estate.html">Shops - Offices - Commercial Space</a></li> --> 
+<!--  									<li><a href="real-estate.html">Vacation Rentals - Guest Houses</a></li> --> 
+<!-- 									<div class="clearfix"></div> -->
+<!-- 								</ul> -->
+<!-- 							</div> -->
+ 						</div> 
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	 <script src="@routes.Assets.at("angularjs/createAd.js")"></script>
+	<script type="text/javascript">
+	var parameters =location.hash.substring(1);
+	var id=parameters.substring(17);
+    $(document).ready(function() {
+	$("html, body").animate({ scrollTop: 450 }, "slow");
+    	loadCategory();
+    	
+    	//alert("#cat"+id)
+    	
+    	//alert("#cat"+id+"")
+        //Vertical Tab
+//         $('#parentVerticalTab').easyResponsiveTabs({
+//             type: 'vertical', //Types: default, vertical, accordion
+//             width: 'auto', //auto or any width like 600px
+//             fit: true, // 100% fit in a container
+//             closed: 'accordion', // Start closed if in accordion view
+//             tabidentify: 'hor_1', // The tab groups identifier
+//             activate: function(event) { // Callback function if tab is switched
+//                 var $tab = $(this);
+//                 var $info = $('#nested-tabInfo2');
+//                 var $name = $('span', $info);
+//                 $name.text($tab.text());
+//                 $info.show();
+//             }
+//         });
+       
+    });
+   
+    function loadCategory(){
+    	
+    	$.get("/category/list", function(data,status,xhr) {
+    		
+    		
+    			 $.each(data, function(i, item) {
+    	       	     $("#categories").append("<li id='cat"+item.id+"' value='"+item.id+"' onclick='getAdDetails("+item.id+")'>"+item.category+"</li>");
+    	       	 
+    	       		});
+    	    	
+       		
+    			   $('#parentVerticalTab').easyResponsiveTabs({
+    		            type: 'vertical', //Types: default, vertical, accordion
+    		            width: 'auto', //auto or any width like 600px
+    		            fit: true, // 100% fit in a container
+    		            closed: 'accordion', // Start closed if in accordion view
+    		            tabidentify: 'hor_1', // The tab groups identifier
+    		            activate: function(event) { // Callback function if tab is switched
+    		                var $tab = $(this);
+    		                var $info = $('#nested-tabInfo2');
+    		                var $name = $('span', $info);
+    		                $name.text($tab.text());
+    		                $info.show();
+    		            }
+    		        });
+    			   
+    			   $("#cat"+id+"").trigger('click');
+    	});
+    	
+    }
+    
+   
+    
+    function getAdDetails(id){
+    	
+    	$("#sub-categories").load("/getAdDetails?categoryId="+id);
+    	//window.location.href ="/getrealestate?productId=" + Id;
+    }
+</script>
+}
+

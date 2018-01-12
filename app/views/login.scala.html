@@ -1,0 +1,277 @@
+@(message:String)
+<!DOCTYPE html>
+<html>
+<head>
+<title>RentEasy</title>
+<link rel="stylesheet" href="@routes.Assets.at("theme/css/bootstrap.min.css")">
+<link rel="stylesheet" href="@routes.Assets.at("theme/css/bootstrap-select.css")">
+<link href="@routes.Assets.at("theme/css/style.css")" rel="stylesheet" type="text/css" media="all" />
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!--fonts-->
+<link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!--//fonts-->	
+<!-- js -->
+<script type="text/javascript" src="@routes.Assets.at("theme/js/jquery.min.js")"></script>
+<!-- js -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="@routes.Assets.at("theme/js/bootstrap.min.js")"></script>
+<script src="@routes.Assets.at("theme/js/bootstrap-select.js")"></script>
+<script>
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
+</script>
+
+<script type="text/javascript" src="@routes.Assets.at("theme/js/jquery.leanModal.min.js")"></script>
+<link href="@routes.Assets.at("theme/css/jquery.uls.css")" rel="stylesheet"/>
+<link href="@routes.Assets.at("theme/css/jquery.uls.grid.css")" rel="stylesheet"/>
+<link href="@routes.Assets.at("theme/css/jquery.uls.lcd.css")" rel="stylesheet"/>
+<!-- Source -->
+<script src="@routes.Assets.at("theme/js/jquery.uls.data.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery.uls.data.utils.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery.uls.lcd.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery.uls.languagefilter.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery.uls.regionfilter.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery.uls.core.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery.validate-1.14.0.min.js")"></script>
+<script src="@routes.Assets.at("theme/js/jquery-validate.bootstrap-tooltip.min.js")"></script>
+ <script src="@routes.Assets.at("theme/js/intlTelInput.min.js")"></script>
+<script>
+			$( document ).ready( function() {
+				$( '.uls-trigger' ).uls( {
+					onSelect : function( language ) {
+						var languageName = $.uls.data.getAutonym( language );
+						$( '.uls-trigger' ).text( languageName );
+					},
+					quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+				} );
+			} );
+		</script>
+</head>
+<body>
+<div class="header">
+		<div class="container">
+			<div class="logo">
+				<a href="/"><span>Rent</span>Easy</a>
+			</div>
+			<div class="header-right">
+			<a class="account" href="/login">My Account</a>
+	<!-- Large modal -->
+			<div class="selectregion">
+			@if(session.get("re_user_location") != null){
+				<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="user_location">
+				@session.get("re_user_location")</button>
+				}else{
+				<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="user_location">
+				Select Your Region</button>
+				}
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+					aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_locations">
+										&times;</button>
+									<h4 class="modal-title" id="myModalLabel">
+										Please Choose Your Location</h4>
+								</div>
+								<div class="modal-body">
+									 <form class="form-horizontal" role="form">
+										<div class="form-group">
+											<select id="basic2" class="show-tick form-control" onchange="userLocation()">
+												<optgroup label="Popular Cities">
+													<option selected style="display:none;color:#eee;">Select City</option>
+													<option value="Bangalore">Bangalore</option>
+													<option value="Hyderabad">Hyderabad</option>
+													<option value="Chenai">Chenai</option>
+													<option value="Mumbai">Mumbai</option>
+													<option value="Delhi">Delhi</option>
+													<option value="kalkata">kalkata</option>
+												</optgroup>
+												<optgroup label="More Cities" id="locations">
+													
+															
+												</optgroup>
+											</select>
+										</div>
+									  </form>    
+								</div>
+							</div>
+						</div>
+					</div>
+				<script>
+				$('#myModal').modal('');
+				</script>
+			</div>
+		</div>
+		</div>
+	</div>
+	 <section>
+<!-- 	 <div class="alert alert-danger" role="alert" id="error"> -->
+<!--         <strong>Oh snap!</strong> Change a few things up and try submitting again. -->
+<!--        </div> -->
+			
+			<div id="page-wrapper" class="sign-in-wrapper">
+			@if(message != ""){
+			<div class="alert alert-success" role="alert">
+		        <strong>Well done!</strong> You successfully signed up with RentEasy.
+		       </div>
+		       }
+				<div class="graphs">
+					<div class="sign-in-form">
+						<div class="sign-in-form-top">
+							<h1>Log in</h1>
+						</div>
+						<div class="signin">
+							<div class="signin-rit">
+								<span class="checkbox1">
+									 <label class="checkbox"><input type="checkbox" name="checkbox" checked="">Forgot Password ?</label>
+								</span>
+								<p><a href="#">Click Here</a> </p>
+								<div class="clearfix"> </div>
+							</div>
+							<form id="myform" method="post">
+							<div class="log-input">
+								<div class="log-input-left">
+								   <input type="text" class="user" id="email" name="email" placeholder="Your Email"/>
+								</div>
+<!-- 								<span class="checkbox2"> -->
+<!-- 									 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i></label> -->
+<!-- 								</span> -->
+								<div class="clearfix"> </div>
+							</div>
+							<div class="log-input">
+								<div class="log-input-left">
+								   <input type="password" class="lock" id="password" name="password" placeholder="password"/>
+								</div>
+<!-- 								<span class="checkbox2"> -->
+<!-- 									 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i></label> -->
+<!-- 								</span> -->
+								<div class="clearfix"> </div>
+							</div>
+							<input type="submit" value="Log in">
+							 <div id="error" style="color:red;margin-top: 10px;text-align:center"></div>
+						</form>	 
+						</div>
+						<div class="new_people">
+							<h2>For New People</h2>
+							<p>Having hands on experience in creating innovative designs,I do offer design 
+								solutions which harness.</p>
+							<a href="/signup">Register Now!</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!--footer section start-->
+			<footer class="diff">
+			   <p class="text-center"> <a href="" target="_blank"></a></p>
+			</footer>
+        <!--footer section end-->
+	</section>
+</body>
+<script type="text/javascript">
+$(document).ready(function()
+{	  
+	//document.getElementById("email").value = "";
+	//document.getElementById("password").value = "";
+	$(".alert").fadeOut(10000);
+	 $("#myform").validate({
+             
+               rules: {
+           	    email: {required: true},
+				password: {required: true}
+			},
+			messages: {
+				email:{
+					required:"Please enter your email",
+				} ,
+				password: "Enter your password"
+			},
+			tooltip_options: {
+				email: {trigger:'focus'},
+				password: {trigger:'focus'}
+			},
+			
+	   submitHandler: function(form) {
+		$.ajax({
+			type:"POST",
+			data: $("#myform").serialize(),
+			url: "/validate",
+			
+			success: function (data) {
+				//alert(data);
+				if(data == "Invalid"){
+// 					document.getElementById("username").value = "";
+// 					document.getElementById("passwordhash").value = "";
+// 					document.getElementById("username").focus();
+// 					$("#displayErrorMsg").append("Invalid Username or Password");
+// 					ev.preventDefault();
+				$("#error").empty();
+                $("#error").append("Invalid Username or password");
+				} else{
+// 					alert("success")
+					window.location.href = "/";
+				}
+				
+			}
+		}); 
+		
+		//ev.preventDefault();
+	}
+});
+});
+</script>
+<script type="text/javascript">
+$( document ).ready( function() {
+	locations();
+});
+function locations(){
+	$.ajaxSetup({async: false});
+	$.get("/locations",function(data){
+		var state_list = data.state_list;
+		var city_list = data.city_list;
+		
+		$.each(state_list,function(i,item){
+			$("#locations").append("<optgroup label='"+item.state+"' id='state"+item.id+"'></optgroup>")
+			$.each(city_list,function(j,item1){
+				if(item.id == item1.state.id){
+					$("#state"+item.id).append("<option value='"+item1.city+"'>"+item1.city+"</option>")
+				}
+			})
+		})
+		
+	});
+	
+    $('#basic2').selectpicker('refresh');
+}
+function userLocation(){
+	$.get("/user/location/"+$("#basic2").val(),function(data){
+		
+	});
+	$("#user_location").html($("#basic2").val());
+	$("#close_locations").click();
+}
+</script>
+</html>

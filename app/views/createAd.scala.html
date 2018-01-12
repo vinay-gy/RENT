@@ -1,0 +1,565 @@
+@(cityform: Form[Product])
+@import helper._
+@main{
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+        }
+        
+        .icon-bar {
+            width: 100%;
+            background-color: #01a185;
+            overflow: auto;
+        }
+        
+        .icon-bar a {
+            float: left;
+            width: 20%;
+            text-align: center;
+            padding: 12px 0;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .icon-bar a:hover {
+            background-color: #000;
+        }
+        
+        .activeBar {
+            background-color: #f3c500 !important;
+        }
+        
+        .collapse {
+            height: 100%;
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+        }
+        
+        @@keyframes slideInFromLeft {
+            0% {
+                transform: translateY(-5%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        .btnN:hover {
+            background-color: #f3c500 !important;
+            border: 1px solid #f3c500 !important;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .post-ad-form input[type="email"],input[type="number"] {
+		    padding: 10px 10px 10px 10px;
+		    width: 70%;
+		    margin-bottom: 25px;
+		    border: 1px solid #01a185;
+		    outline: none;
+		    color: #555;
+		    transition: 0.5s all;
+		    -webkit-transition: 0.5s all;
+		    -moz-transition: 0.5s all;
+		    -o-transition: 0.5s all;
+		    -ms-transition: 0.5s all;
+		    float: left;
+		}
+    </style>
+</head>
+
+<div class="submit-ad main-grid-border" style="height:100%;margin-bottom: 5%;border-bottom: none" ng-app="createAd" ng-controller="createAdCtrl">
+    <div class="container">
+        <h2 class="head">Post an Ad</h2>
+        <div style="border:1px solid #f3c500;height:100%;border-top:none;">
+            <div class="icon-bar">
+                <a id="togglefirst" class="toggle activeBar" onclick="toggle('first')"><i class="fa fa-bars"></i></a>
+                <a id="togglesecond" class="toggle" onclick="toggle('second')"><i class="fa fa-image"></i></a>
+                <a id="togglethird" class="toggle" onclick="toggle('third')"><i class="fa fa-inr"></i></a>
+                <a id="toggleforth" class="toggle" onclick="toggle('forth')"><i class="fa fa-check-square-o"></i></a>
+                <a id="togglefivth" class="toggle" onclick="toggle('fivth')"><i class="fa fa-user"></i></a>
+            </div>
+            <div class="post-ad-form" style="border:none;margin-bottom: 0px ">
+                <form id="common" method="POST" action="/product/save" enctype="multipart/form-data">
+                    <div id="first" class="collapse">
+                    <div class="row">
+                    <div class="col-md-6">
+                    	<h2 class="head">Start adding your product</h2>
+                    	</div>
+						<div class="col-md-6 error" style="text-align: right;" id="firsterror" >
+                    	<h3 class="head" style="color:red;">Please fill all the mandatory fields (*)</h3>
+                    	</div>
+                    </div>
+                    	
+                        
+
+                        <label>Select Category <span>*</span></label>
+                        <select ng-model="category" ng-change="changeCategory()" name="categories.id">
+                            <option value="" selected>Select category</option>
+                            <option ng-repeat="x in categoryList" value="{{x.id}}">{{x.category}}</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <label>Select sub category <span>*</span></label>
+                        <select ng-model="sub_category" ng-change="changeSubCategory()" name="subCategories.id">
+                            <option value="" selected>Select sub category</option>
+                            <option ng-repeat="x in subCategoryList" value="{{x.id}}">{{x.subCategory}}</option>
+                        </select>
+                        <div class="clearfix"></div>
+                        <label>Select Type / Brand <span>*</span></label>
+                        <select ng-model="product_type" ng-change="changeProduct()"  id="productType" ng-options="y.productType for (x, y) in productTypeList">
+                           <option ng-repeat="x in productTypeList" value="{{x.id}}">{{x.subCategory}}</option> 
+                        </select>
+                        <input type="text" id="productTypeId" name="productType.id" ng-model="productId" style="display:none"/>
+                        <input type="text" id="productRoute" ng-model="productRoute" style="display:none"/>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('second')">Next</button>
+
+                        </div>
+                    </div>
+                    <div id="second" class="collapse">
+                        <label style="float:right;color:red">* Max 5 Images </label>
+                        <div class="row">
+	                    <div class="col-md-6">
+	                    	<h2 class="head">Upload Images </h2>
+	                    	</div>
+							<div class="col-md-6 error" style="text-align: right;" id="seconderror" >
+	                    	<h3 class="head" style="color:red;">Please fill all the mandatory fields (*)</h3>
+	                    	</div>
+	                    </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <div class="col-md-4">
+                                <label style="width:100%">Ad Title <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <input ng-model="title" type="text" class="phone" placeholder="" style="width:100%" name="title" id="title">
+                            </div>
+                            <div class="col-md-4">
+                                <label style="width:100%">Ad Description <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea ng-model="description" name="description" id="description" class="mess" placeholder="Write few lines about your product" style="width:100%"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <label>Photos for your ad :</label>
+                            <div class="photos-upload-view">
+
+                                <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
+
+                                <div>
+                                    <input ng-model="images" type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                                    <div id="filedrag">or drop files here</div>
+                                </div>
+
+                                <div id="submitbutton">
+                                    <button type="submit">Upload Files</button>
+                                </div>
+                                
+<!--                                 <div id="messages"> -->
+<!-- 									<p>Status Messages</p> -->
+<!-- 								</div> -->
+<!-- 								<div id="preview"> -->
+								
+<!-- 								</div> -->
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+								
+						</div>
+						<div class="col-md-6 col-sm-6"  id="preview">
+						
+						</div>
+                        <div class="clearfix"></div>
+                        <script src="@routes.Assets.at("theme/js/filedrag.js")"></script>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('first')">Previous</button>
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('third')">Next</button>
+
+                        </div>
+                    </div>
+                    <div id="third" class="collapse">
+                        
+                        <div class="row">
+	                    <div class="col-md-6">
+	                    	<h2 class="head">Price Section </h2>
+	                    	</div>
+							<div class="col-md-6 error" style="text-align: right;" id="thirderror" >
+	                    	<h3 class="head" style="color:red;">Please fill all the mandatory fields (*)</h3>
+	                    	</div>
+	                    </div>
+
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 1%">
+                            <div class="col-md-4">
+                                <label style="width:100%">Rent Amount <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <input ng-model="price" type="number" class="phone" placeholder="" style="width:100%" name="price" id="price">
+                            </div>
+                            <div class="col-md-4">
+                                <label style="width:100%">Duration <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration" value="Hourly"> Hourly</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration" value="Daily"> Daily</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration" value="Monthly"> Monthly</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="duration" value="Yearly"> Yearly</label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <label style="width:100%">Is Negotiable <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isNegotiable" value="Yes"> Yes</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isNegotiable" value="No"> No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding-left: 0px;">
+		                                <label style="width:100%">Deposit Mandatory <span>*</span></label>
+		                            </div>
+		                            <div class="col-md-8">
+		                                <div class="col-md-6">
+		                                    <label style="width:100%;text-align:left">
+		                                        <input type="radio" name="isDepositOptional" ng-model="showDeposit"  ng-value="true" value="Yes"> Yes</label>
+		                                </div>
+		                                <div class="col-md-6">
+		                                    <label style="width:100%;text-align:left">
+		                                        <input type="radio" name="isDepositOptional" ng-model="showDeposit"   ng-value="false" value="No"> No</label>
+		                                </div>
+		                        </div>
+                            
+
+                            
+
+                        </div>
+                        <div class="col-md-6 col-sm-12" ng-show="(showDeposit ==true)?true:false" style="margin-bottom: 1%">
+	                        
+                            <div class="row" >
+                            	<div class="col-md-4">
+	                                <label style="width:100%">Deposit <span>*</span></label>
+	                            </div>
+	                            <div class="col-md-8">
+	                                <input ng-model="deposit" type="number" class="phone" placeholder="" style="width:100%" name="deposit" id="deposit">
+	                            </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label style="width:100%">Refundable <span>*</span></label>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isRefundable"> Yes</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label style="width:100%;text-align:left">
+                                        <input type="radio" name="isRefundable"> No</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('second')">Previous</button>
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('forth')">Next</button>
+
+                        </div>
+                    </div>
+                    
+                    <div id="fivth" class="collapse">
+
+                        
+                        <div class="row">
+	                    <div class="col-md-6">
+	                    	<h2 class="head">Profile Details</h2>
+	                    	</div>
+							<div class="col-md-6 error" style="text-align: right;" id="fivtherror" >
+	                    	<h3 class="head" style="color:red;">Please fill all the mandatory fields (*)</h3>
+	                    	</div>
+	                    </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Your Name <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input ng-model="name" type="text" class="phone" placeholder="" style="width:100%">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Your Email ID <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input ng-model="email" type="email" class="phone" placeholder="" style="width:100%" name="email" id="email">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Address <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input ng-model="address" type="text" class="phone" placeholder="" style="width:100%" name="address" id="address">
+                                </div>
+                            </div><br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Mobile Number <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input ng-model="mobile" type="number" class="phone" placeholder="" style="width:100%" name="mobile" id="mobile" >
+                                </div>
+                            </div><br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Select State <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select  ng-model="state"  name="state.id" style="width:100%" id="state">
+									  <option value="" selected>Select State</option>
+									  <option value="1">Karnataka</option>
+									</select>
+                                </div>
+                            </div><br>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Select City <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select  ng-model="city"  name="city.id" style="width:100%" id="city">
+									  <option value="" selected>Select City</option>
+									  <option value="1">Bangalore</option>
+									</select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <label style="width:100%">Select Locality <span>*</span></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select  ng-model="locality" name="locality.id" style="width:100%" id="locality">
+									  <option value="" selected>Select Locality</option>
+									  <option value="1">Basaveshwara nagara</option>
+									</select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label style="width:100%">Search Keywords <span>*</span></label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="searchKey" id="searchKey">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
+                            <button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="toggle('forth')">Previous</button>
+							<button type="button" class="btnN" style="font-size: 15px;color: #fff;background-color: #01a185;outline: none;padding: 6px 20px;text-decoration: none;border:1px solid #01a185;" onclick="return toggle('final')" >Submit</button>
+							<button type="button" class="btnN" style="display:none;" data-toggle="modal" data-target="#verifyOtp" id="sendOtp"></button>
+                        </div>
+                    </div>
+
+               </form>
+                <div id="forth" class="collapse">
+                
+                </div>
+                
+                    
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="verifyOtp" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+					aria-hidden="true" data-backdrop="static" data-keyboard="false">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close_locations">
+										&times;</button>
+									<h4 class="modal-title" id="myModalLabel">
+										Please Verify Your Mobile Number</h4>
+								</div>
+								<div class="modal-body">
+									 <form class="form-horizontal" role="form">
+										<div class="form-group">
+											<label> Enter OTP</label>
+											<input type="password" name="otp" id="otp">
+										</div>
+									  </form>    
+								</div>
+							</div>
+						</div>
+					</div>
+					
+ <script src="@routes.Assets.at("angularjs/createAd.js")"></script>
+	<script>
+	$(document).ready(function(){
+		$("html, body").animate({ scrollTop: 450 }, "slow");
+		$('#first').show();
+		$('.error').hide();
+		$("#productType").change(function(){
+			var pid = $("#productTypeId").val();
+			var route = $("#productRoute").val();
+			
+			getProductSpecificForm(route);
+		});
+		$('#productType option[value="?"]').remove();
+		$( '#common' ).submit( function( e ) {
+		    $.ajax( {
+		      type: 'POST',
+		      data: new FormData( this ),
+		      processData: false,
+		      contentType: false,
+		      url: "/product/save",
+	 			success: function(res) {
+	 	        	
+	 	              
+	 	        	if(res!= "0"){
+	 	        		submitFormSpecific(res)
+	 	            }else{
+	 	              alert(res)
+	 	            	
+	 	            }
+	 	        },
+	 	        error: function(err) {
+	 	          
+	 	        }
+		    } );
+		    e.preventDefault();
+		  } );
+		
+	});
+	
+	function getProductSpecificForm(route){
+		$.ajaxSetup({async: false});
+		$('#forth').load(route);
+	}
+	
+	function toggle(id){
+		if(validate(id)){
+			$('.collapse').hide();
+			$('#'+id).show();
+			$('.activeBar').removeClass('activeBar')
+			$('#toggle'+id).addClass('activeBar')
+		}
+	}
+	
+	function validate(id){
+		var result = true;
+		switch (id) {
+	    case "first":
+	    	result = "true";
+	        break; 
+	    case "second":
+	    	if($("#productTypeId").val() == null || $("#productTypeId").val() == ""){
+	    		result = false;
+	    		hideError('first')
+	    		}
+	        break; 
+	    case "third":
+	    	if($("#description").val() == null || $("#description").val() == "" || $("#title").val() == null || $("#title").val() == "" || ($('#common input[type=file]').get(0).files.length < 1))
+	        	{result = false;
+	    		hideError('second')}
+	        break; 
+	    case "forth":
+	    	if($("#price").val() == null || $("#price").val() == "" || $('input[name=duration]:checked').length<=0 || $('input[name=isNegotiable]:checked').length<=0 || $('input[name=isDepositOptional]:checked').length<=0)
+	        	{
+	    		result = false;
+    			hideError('third')
+	        	}
+	    	else{
+	    		if($('input[name=isDepositOptional]:checked').val() == "true"){
+	    			if($("#deposit").val() == null || $("#deposit").val() == "" || $('input[name=isRefundable]:checked').length<=0){
+	    				result = false;
+	    	    		hideError('third')
+	    			}
+	    		}
+	    	}
+	        break;
+	    case "fivth":
+	        if(formValidation()){
+	        	result = true;
+	        }else{
+	        	result = false;
+	        	hideError('forth')
+	        }
+	        break;
+	    case "final":
+	    	if($("#email").val() == null || $("#email").val() == "" || $("#state").val() == null || $("#state").val() == "" || $("#locality").val() == null || $("#locality").val() == "" || $("#city").val() == null || $("#city").val() == "" || $("#mobile").val() == null || $("#mobile").val() == "" || $("#address").val() == null || $("#adress").val() == "")
+	    		result = false;
+	    	else{
+	    		//$("#sendOtp").click();
+	    		$("#common").submit();
+	    		}
+	    		break;
+		}
+		result = true;
+		return result;
+	}
+	
+	function hideError(id){
+		
+		$('.error').show()
+		setTimeout(function() {
+		    $('.error').fadeOut('fast');
+		}, 5000);
+	}
+	
+	function submitFormSpecific(pid){
+		$("#productId").val(pid)
+		$("#description2").val($("#description").val())
+		var action = $('#specific').attr('action'); 
+		$.ajax({
+ 	        type: "POST",
+ 	       data: $("#specific").serialize(),
+ 	      url: action,
+ 			success: function(res) {
+ 	        	
+ 	              
+ 	        	if(res!= "0"){
+ 	        		window.location.href = "/product/create/success/"+pid;
+ 	            }else{
+ 	              alert(res)
+ 	            	
+ 	            }
+ 	        },
+ 	        error: function(err) {
+ 	          
+ 	        }
+ 	    });
+	}
+	</script>
+}

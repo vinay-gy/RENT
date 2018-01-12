@@ -1,0 +1,56 @@
+<configuration>
+    
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+
+	   <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+	     <file>${application.home}/logs/application.log</file>
+	     <encoder>
+	       <pattern>%date - [%level] - from %logger in %thread %n%message%n%xException%n</pattern>
+	     </encoder>
+	   </appender>
+	
+	   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <encoder>
+	      <pattern>%coloredLevel %logger{15} - %message%n%xException{5}</pattern>
+	    </encoder>
+	   </appender>
+	  
+	   <root level="ERROR">
+	    <appender-ref ref="STDOUT" />
+	    <appender-ref ref="FILE" />
+	  </root>
+	  
+	   <appender name="CATEGORY" logger="categorylog" class="ch.qos.logback.core.FileAppender">
+	     <file>${application.home}/logs/categorylog.log</file>
+	     <encoder>
+	       <pattern>%date - [%level] - from %logger %n%message%n%xException%n</pattern>
+	     </encoder>
+	   </appender>
+	   
+	   <logger name="categorylog" level="DEBUG">
+	    <appender-ref ref="CATEGORY" />
+	   </logger>
+	   
+	   <appender name="PRODUCT" logger="productlog" class="ch.qos.logback.core.FileAppender">
+	     <file>${application.home}/logs/productlog.log</file>
+	     <encoder>
+	       <pattern>%date - [%level] - from %logger %n%message%n%xException%n</pattern>
+	     </encoder>
+	   </appender>
+	   
+	   <logger name="productlog" level="DEBUG">
+	    <appender-ref ref="PRODUCT" />
+	   </logger>
+	   
+	   <appender name="AD" logger="adLog" class="ch.qos.logback.core.FileAppender">
+	     <file>${application.home}/logs/adLog.log</file>
+	     <encoder>
+	       <pattern>%date - [%level] - from %logger %n%message%n%xException%n</pattern>
+	     </encoder>
+	   </appender>
+	   
+	   <logger name="adLog" level="DEBUG">
+	    <appender-ref ref="AD" />
+	   </logger>
+	
+</configuration>
