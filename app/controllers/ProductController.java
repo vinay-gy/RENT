@@ -122,7 +122,7 @@ public class ProductController extends Controller {
 				        	destination.delete();
 				        }
 				  	  	FileUtils.moveFile(image, destination);
-				        System.out.println(destination.getPath());
+				        //System.out.println(destination.getPath());
 				  	  	i++;
 		        		}
 		        }
