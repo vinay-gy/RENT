@@ -68,6 +68,7 @@
 		    -ms-transition: 0.5s all;
 		    float: left;
 		}
+		
     </style>
 </head>
 
@@ -462,12 +463,13 @@
 	 	        	if(res!= "0"){
 	 	        		submitFormSpecific(res)
 	 	            }else{
+	 	            	$("#spinner").hide()
 	 	              alert(res)
 	 	            	
 	 	            }
 	 	        },
 	 	        error: function(err) {
-	 	          
+	 	        	$("#spinner").hide()
 	 	        }
 		    } );
 		    e.preventDefault();
@@ -490,6 +492,7 @@
 	}
 	
 	function validate(id){
+		$("#spinner").show()
 		var result = true;
 		switch (id) {
 	    case "first":
@@ -534,12 +537,15 @@
 	    		result = false;
 	    	else{
 	    		//$("#sendOtp").click();
-	    		$("#common").submit();
+	    		
+				$("#common").submit();
 	    		}
 	    		break;
 		}
-		result = true;
+		//result = true;
+		$("#spinner").hide()
 		return result;
+		
 	}
 	
 	function hideError(id){
@@ -562,8 +568,10 @@
  	        	
  	              
  	        	if(res!= "0"){
+ 	        		$("#spinner").hide()
  	        		window.location.href = "/product/create/success/"+pid;
  	            }else{
+ 	            	$("#spinner").hide()
  	              alert(res)
  	            	
  	            }

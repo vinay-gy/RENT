@@ -194,7 +194,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		    transform: scale(1);
 		}
 		}
-				
+		#spinner {
+		     position: fixed;
+		     left: 0px;
+		     top: 0px;
+		     width: 100%;
+		     height: 100%;
+		     background: url(@routes.Assets.at("images/loader3.gif"))50% 40% no-repeat;
+		 	z-index: 9999;
+		 }    
 		</style>
 </head>
 <body>
@@ -211,6 +219,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="dot"></div>
 			<div class="lading"></div>
 		</div>
+		<div id="spinner" style="display:none"></div>
+            
 			<div class="logo">
 				<a href="/"><span>Rent</span>Easy</a>
 			</div>

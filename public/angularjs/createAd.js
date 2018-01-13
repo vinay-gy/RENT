@@ -13,12 +13,15 @@ app.controller('createAdCtrl', function($scope, $http) {
         	$scope.categoryList = response.data;
         });
 	$scope.changeCategory = function() {
+		$("#spinner").show()
 		$http.get("subcategory/"+$scope.category)
         .then(function(response) {
         	$scope.subCategoryList = response.data;
         });
+		$("#spinner").hide()
     }
 	$scope.changeSubCategory = function() {
+		$("#spinner").show()
 		$('#productType').empty();
 		$http.get("producttype/"+$scope.sub_category)
         .then(function(response) {
@@ -26,6 +29,7 @@ app.controller('createAdCtrl', function($scope, $http) {
         	
         });
 		$('#productType option[value="?"]').remove();
+		$("#spinner").hide()
     }
 	$scope.changeProduct = function() {
 		$scope.productRoute = $scope.product_type.route;

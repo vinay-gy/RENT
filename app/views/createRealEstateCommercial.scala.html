@@ -98,18 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="col-md-4">
-                                    <label style="width:100%">Search Keywords <span>*</span></label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="phone" placeholder="" style="width:100%" name="search_key" id="search_key">
-                                </div>
-                            </div>
-                            
-                        </div>
+                        
                        
 
                         <div style="bottom:0;border-top:1px solid #f3c500;text-align:right;padding:10px">
@@ -127,7 +116,7 @@
                 	});
                     function formValidation(){
                     	var result = true;
-                    	if($("#search_key").val() == null || $("#search_key").val() == "" || $("#sq_ft").val() == null || $("#sq_ft").val() == "" || $("#floor_no").val() == null || $("#floor_no").val() == "" || $("#age_of_property").val() == null || $("#age_of_property").val() == "" || $("#property_type").val() == null || $("#property_type").val() == "" || $('input[name=foodType]:checked').length<=0 || $('input[name=toiletType]:checked').length<=0)
+                    	if($("#search_key").val() == null || $("#sq_ft").val() == null || $("#sq_ft").val() == "" || $("#floor_no").val() == null || $("#floor_no").val() == "" || $("#age_of_property").val() == null || $("#age_of_property").val() == "" || $("#property_type").val() == null || $("#property_type").val() == "" || $('input[name=foodType]:checked').length<=0 || $('input[name=toiletType]:checked').length<=0)
             	        	result = false;
             	    	
                     	return result;
