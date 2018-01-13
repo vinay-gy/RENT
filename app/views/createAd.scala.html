@@ -132,17 +132,21 @@
 	                    </div>
 
                         <div class="col-md-6 col-sm-12">
+                        <div class="row">
                             <div class="col-md-4">
                                 <label style="width:100%">Ad Title <span>*</span></label>
                             </div>
                             <div class="col-md-8">
                                 <input ng-model="title" type="text" class="phone" placeholder="" style="width:100%" name="title" id="title">
                             </div>
+                            </div>
+                            <div class="row">
                             <div class="col-md-4">
                                 <label style="width:100%">Ad Description <span>*</span></label>
                             </div>
                             <div class="col-md-8">
                                 <textarea ng-model="description" name="description" id="description" class="mess" placeholder="Write few lines about your product" style="width:100%"></textarea>
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
@@ -198,12 +202,15 @@
 	                    </div>
 
                         <div class="col-md-6 col-sm-12" style="margin-bottom: 1%">
+                            <div class="row">
                             <div class="col-md-4">
                                 <label style="width:100%">Rent Amount <span>*</span></label>
                             </div>
                             <div class="col-md-8">
                                 <input ng-model="price" type="number" class="phone" placeholder="" style="width:100%" name="price" id="price">
                             </div>
+                            </div>
+                            <div class="row">
                             <div class="col-md-4">
                                 <label style="width:100%">Duration <span>*</span></label>
                             </div>
@@ -226,6 +233,8 @@
                                 </div>
 
                             </div>
+                            </div>
+                            <div class="row">
                             <div class="col-md-4">
                                 <label style="width:100%">Is Negotiable <span>*</span></label>
                             </div>
@@ -239,6 +248,8 @@
                                         <input type="radio" name="isNegotiable" value="No"> No</label>
                                 </div>
                             </div>
+                            </div>
+                            <div class="row">
                             <div class="col-md-4" style="padding-left: 0px;">
 		                                <label style="width:100%">Deposit Mandatory <span>*</span></label>
 		                            </div>
@@ -251,6 +262,7 @@
 		                                    <label style="width:100%;text-align:left">
 		                                        <input type="radio" name="isDepositOptional" ng-model="showDeposit"   ng-value="false" value="No"> No</label>
 		                                </div>
+		                        </div>
 		                        </div>
                             
 
@@ -307,7 +319,7 @@
 	                    </div>
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Your Name <span>*</span></label>
                                 </div>
@@ -316,7 +328,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Your Email ID <span>*</span></label>
                                 </div>
@@ -325,7 +337,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Address <span>*</span></label>
                                 </div>
@@ -333,7 +345,7 @@
                                     <input ng-model="address" type="text" class="phone" placeholder="" style="width:100%" name="address" id="address">
                                 </div>
                             </div><br>
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Mobile Number <span>*</span></label>
                                 </div>
@@ -341,7 +353,7 @@
                                     <input ng-model="mobile" type="number" class="phone" placeholder="" style="width:100%" name="mobile" id="mobile" >
                                 </div>
                             </div><br>
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Select State <span>*</span></label>
                                 </div>
@@ -352,7 +364,7 @@
 									</select>
                                 </div>
                             </div><br>
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Select City <span>*</span></label>
                                 </div>
@@ -363,7 +375,7 @@
 									</select>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="row">
                                 <div class="col-md-2">
                                     <label style="width:100%">Select Locality <span>*</span></label>
                                 </div>
@@ -374,11 +386,11 @@
 									</select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-2">
                                     <label style="width:100%">Search Keywords <span>*</span></label>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <input type="text" class="phone" placeholder="" style="width:100%" name="searchKey" id="searchKey">
                                 </div>
                             </div>
