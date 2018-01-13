@@ -18,10 +18,7 @@
                                     <label style="width:100%">Brand Name <span>*</span></label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select  style="width:100%" name="brand" id="brand">
-                                        <option value="one" selected>Select Brand</option>
-                                        
-                                    </select>
+                                    <input type="text" class="phone" placeholder="" style="width:100%" name="brand" id="brand" >
                                 </div>
                             </div>
                             
@@ -131,7 +128,7 @@
                     function formValidation(){
                     	var result = true;
                     	//$("#brand").val() == null || 
-                    	if($("#model").val() == "" || $("#ram").val() == null || $("#hardDisk").val() == "" || $("#processor").val() == "" || $('input[name=isWithDriver]:checked').length<=0)
+                    	if($("#model").val() == "" || $("#ram").val() == null || $("#hardDisk").val() == "" || $("#processor").val() == "" )
             	        	result = false;
             	    	
                     	return result;
