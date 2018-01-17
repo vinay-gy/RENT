@@ -18,7 +18,8 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-ws" % "2.3.7",
   "org.json" % "org.json"% "chargebee-1.0",
   "org.apache.ibatis" % "ibatis-sqlmap" % "2.3.0",
-  "com.edulify" %% "play-hikaricp" % "1.4.1"
+  "com.edulify" %% "play-hikaricp" % "1.4.1",
+  "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
